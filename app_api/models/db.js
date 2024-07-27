@@ -34,6 +34,8 @@ if(process.platform === 'win32'){
         process.emit("SIGINT"); 
     }); 
 } 
+
+connect();
  
 // Configure for Graceful Shutdown 
 const gracefulShutdown = (msg) => { 
@@ -59,8 +61,10 @@ process.on('SIGTERM', () => {
 gracefulShutdown('app shutdown'); 
 process.exit(0); 
 }); 
+
 // Make initial connection to DB 
-connect(); 
+connect();
+
 // Import Mongoose schema 
 require('./travlr'); 
 module.exports = mongoose;
