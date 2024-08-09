@@ -3,6 +3,11 @@ const host = process.env.DB_HOST || '127.0.0.1';
 const dbURI = `mongodb://${host}/travlr`; 
 
 const readLine = require('readline'); 
+
+//const options = {
+  //  useNewUrlParser: true,
+    //useUnifiedTopology: true,
+//};
  
 // Build the connection string and set the connection timeout.  
 // timeout is in milliseconds. 
@@ -35,7 +40,6 @@ if(process.platform === 'win32'){
     }); 
 } 
 
-connect();
  
 // Configure for Graceful Shutdown 
 const gracefulShutdown = (msg) => { 
