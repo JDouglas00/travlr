@@ -4,13 +4,14 @@ import { TripCardComponent } from '../trip-card/trip-card.component';
 import { Router } from '@angular/router';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-listing',
   standalone: true,
   imports: [CommonModule, TripCardComponent],
   templateUrl: './trip-listing.component.html',
-  styleUrl: './trip-listing.component.css',
+  styleUrls: ['./trip-listing.component.css'], // Changed 'styleUrl' to 'styleUrls'
   providers: [TripDataService]
 })
 
@@ -20,6 +21,7 @@ export class TripListingComponent implements OnInit {
 
   constructor(
     private tripDataService: TripDataService,
+    private authService: AuthenticationService,
     private router: Router
   ) {
     console.log('trip-listing constructor');
@@ -27,6 +29,25 @@ export class TripListingComponent implements OnInit {
 
   public addTrip(): void {
     this.router.navigate(['add-trip']);
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  public deleteTrip(tripCode: string): void {
+    if (confirm('Are you sure you want to delete this trip?')) {
+      this.tripDataService.deleteTrip(tripCode)
+        .subscribe({
+          next: () => {
+            console.log('Trip deleted successfully');
+            this.getStuff(); // Refresh the trip list after deletion
+          },
+          error: (error: any) => {
+            console.log('Error: ' + error);
+          }
+        });
+    }
   }
 
   private getStuff(): void {
@@ -54,3 +75,4 @@ export class TripListingComponent implements OnInit {
     this.getStuff();
   }
 }
+

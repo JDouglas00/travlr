@@ -10,7 +10,7 @@ import { Trip } from '../models/trip';
   standalone: true, 
   imports: [CommonModule, ReactiveFormsModule], 
   templateUrl: './edit-trip.component.html', 
-  styleUrls: ['./edit-trip.component.css'] // Fixed typo from 'styleUrl' to 'styleUrls'
+  styleUrls: ['./edit-trip.component.css'] 
 }) 
 export class EditTripComponent implements OnInit { 
 
@@ -74,6 +74,11 @@ export class EditTripComponent implements OnInit {
     this.submitted = true; 
 
     if (this.editForm.valid) { 
+      console.log("Form Data: ", this.editForm.value);
+
+      const token = this.tripDataService.getToken();
+      console.log("JWT Token: ", token);
+
       this.tripDataService.updateTrip(this.editForm.value)
       .subscribe({
         next: (value: any) => {
@@ -81,7 +86,7 @@ export class EditTripComponent implements OnInit {
           this.router.navigate(['']); // Navigate to the desired route after update
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          console.log('Error updating trip: ', error);
         }
       })
     } 
@@ -92,4 +97,5 @@ export class EditTripComponent implements OnInit {
     return this.editForm.controls; 
   }
 }
+
 
