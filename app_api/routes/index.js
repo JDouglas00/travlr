@@ -14,5 +14,8 @@ router
     .route('/trips/:tripCode')
     .get(tripsController.tripsFindByCode)  //GET Method routes tripList
     .put(tripsController.tripsUpdateTrip);
+
+router
+    .use('/Question', require('../../lafs-api/routes/question'));
     
 module.exports = router;

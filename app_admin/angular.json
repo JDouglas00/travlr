@@ -57,40 +57,43 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "travlr-admin:build:production"
+              "buildTarget": "travlr-admin:build:production",
             },
-            "development": {
-              "buildTarget": "travlr-admin:build:development"
-            }
+              "development": {
+                "buildTarget": "travlr-admin:build:development"
+              }
+            },
+            "defaultConfiguration": "development"
           },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              
+          "extract-i18n": {
+            "builder": "@angular-devkit/build-angular:extract-i18n"
+          },
+          "test": {
+            "builder": "@angular-devkit/build-angular:karma",
+            "options": {
+              "polyfills": [
+                "zone.js",
+                "zone.js/testing"
+              ],
+              "tsConfig": "tsconfig.spec.json",
+              "assets": [
+
                 "src/favicon.ico",
                 "src/assets"
-              
-            ],
-            "styles": [
-              "src/assets/css/styles.css"
-            ],
-            "scripts": []
+
+              ],
+              "styles": [
+                "src/assets/css/styles.css"
+              ],
+              "scripts": []
+            }
           }
         }
-      }
-    }
+        }
   }
 }

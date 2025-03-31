@@ -11,7 +11,7 @@ export const trips = [
     },
     {
         "code" : "DAWR210315",
-        "name": "Dawson’s Reef",
+        "name": "Justin’s Rock",
         "length" :"4 nights / 5 days",
         "start" : "2021-03-15T08:00:00Z",
         "resort" : "Blue Lagoon, 4 stars",

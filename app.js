@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+var questionsRouter = require('./lafs-api/routes/question');
 
 // Define routers
 var indexRouter = require('./app_server/routes/index');
@@ -11,6 +12,9 @@ var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
 var roomsRouter = require('./app_server/routes/rooms');
 var apiRouter = require('./app_api/routes/index');
+
+// Added for Angular Questions
+//var questionsRouter = require('./lafs-api/routes/questions');
 
 var hbs = require('hbs');
 
@@ -48,6 +52,9 @@ app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/rooms', roomsRouter);
 app.use('/api', apiRouter);
+
+// Added for Angular Questions
+app.use('/api/Questions', questionsRouter);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {
